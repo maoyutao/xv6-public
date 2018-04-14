@@ -1,3 +1,10 @@
+/*
+*文件名称：touch.c
+*创建者：程嘉梁
+*创建日期：2018/04/14
+*文件描述：实现新建文件的功能（touch命令）
+*历史记录：整合自三字班方案二
+*/
 #include "types.h"
 #include "stat.h"
 #include "user.h"
