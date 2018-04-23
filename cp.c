@@ -1,3 +1,11 @@
+/*
+*文件名称：cp.c
+*创建者：程嘉梁
+*创建日期：2018/04/15
+*文件描述：实现文件拷贝的功能（cp命令）
+*历史记录：整合自三字班方案二
+*/
+
 #include "types.h"
 #include "stat.h"
 #include "user.h"
@@ -13,20 +21,20 @@ int flag = 0;
 void showInvalidOption()
 {
 	printf(2,"Invalid option\n");
-	printf(2,"Try 'date -h' for help\n");	
+	printf(2,"Try 'cp -h' for help\n");//三字班最初代码有误，对于此处进行修正
 }
 
 void showHelpText()
 {
-	printf(1,"Usage: ls [-n | -z] [src_path] [dest_path]\n");
+	printf(1,"Usage: cp [-n | -z] [src_path] [dest_path]\n");
 	printf(1,"-n: Don't overwrite any file.\n");
-	printf(1,"-p: Don't overwrite any file newer than source");	
+	printf(1,"-p: Don't overwrite any file newer than source\n");	
 }
   
 
 int main(int argc, char *argv[]){
 	//check the arguments
-	if(argc<3)	{
+	if(argc<3 && argv[1][1]!='h')	{
 		showInvalidOption();
 		exit();
 	}
