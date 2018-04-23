@@ -10,7 +10,7 @@
 #include "user.h"
 
 void head(int fp,int num){
-	int i,length,pos;
+	int i,length,pos=0;
 	const int bufSize = 128;
 	char buf[bufSize];
 	char tmp[bufSize];
