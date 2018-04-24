@@ -176,6 +176,12 @@ UPROGS=\
 	_wc\
 	_zombie\
 	_vim\
+	_mv\
+	_touch\
+	_cp\
+	_head\
+	_tail\
+	_splice\
 
 
 fs.img: mkfs README $(UPROGS)
