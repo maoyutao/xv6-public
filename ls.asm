@@ -192,7 +192,7 @@ ls(char *path)
   }
 
   if(fstat(fd, &st) < 0){
- 122:	8d b5 d4 fd ff ff    	lea    -0x22c(%ebp),%esi
+ 122:	8d b5 d0 fd ff ff    	lea    -0x230(%ebp),%esi
  128:	83 ec 08             	sub    $0x8,%esp
  12b:	89 c3                	mov    %eax,%ebx
  12d:	56                   	push   %esi
@@ -207,7 +207,7 @@ ls(char *path)
   }
 
   switch(st.type){
- 13f:	0f b7 85 d4 fd ff ff 	movzwl -0x22c(%ebp),%eax
+ 13f:	0f b7 85 d0 fd ff ff 	movzwl -0x230(%ebp),%eax
  146:	66 83 f8 01          	cmp    $0x1,%ax
  14a:	74 54                	je     1a0 <ls+0xa0>
  14c:	66 83 f8 02          	cmp    $0x2,%ax
@@ -215,8 +215,8 @@ ls(char *path)
   case T_FILE:
     printf(1, "%s %d %d %d\n", fmtname(path), st.type, st.ino, st.size);
  152:	83 ec 0c             	sub    $0xc,%esp
- 155:	8b 95 e4 fd ff ff    	mov    -0x21c(%ebp),%edx
- 15b:	8b b5 dc fd ff ff    	mov    -0x224(%ebp),%esi
+ 155:	8b 95 e0 fd ff ff    	mov    -0x220(%ebp),%edx
+ 15b:	8b b5 d8 fd ff ff    	mov    -0x228(%ebp),%esi
  161:	57                   	push   %edi
  162:	89 95 b4 fd ff ff    	mov    %edx,-0x24c(%ebp)
  168:	e8 f3 fe ff ff       	call   60 <fmtname>
@@ -270,7 +270,7 @@ ls(char *path)
  1ba:	8d 85 e8 fd ff ff    	lea    -0x218(%ebp),%eax
  1c0:	83 ec 08             	sub    $0x8,%esp
  1c3:	57                   	push   %edi
- 1c4:	8d bd c4 fd ff ff    	lea    -0x23c(%ebp),%edi
+ 1c4:	8d bd c0 fd ff ff    	lea    -0x240(%ebp),%edi
  1ca:	50                   	push   %eax
  1cb:	e8 70 01 00 00       	call   340 <strcpy>
     p = buf+strlen(buf);
@@ -310,12 +310,12 @@ ls(char *path)
  20f:	83 f8 10             	cmp    $0x10,%eax
  212:	0f 85 71 ff ff ff    	jne    189 <ls+0x89>
       if(de.inum == 0)
- 218:	66 83 bd c4 fd ff ff 	cmpw   $0x0,-0x23c(%ebp)
+ 218:	66 83 bd c0 fd ff ff 	cmpw   $0x0,-0x240(%ebp)
  21f:	00 
  220:	74 de                	je     200 <ls+0x100>
         continue;
       memmove(p, de.name, DIRSIZ);
- 222:	8d 85 c6 fd ff ff    	lea    -0x23a(%ebp),%eax
+ 222:	8d 85 c2 fd ff ff    	lea    -0x23e(%ebp),%eax
  228:	83 ec 04             	sub    $0x4,%esp
  22b:	6a 0e                	push   $0xe
  22d:	50                   	push   %eax
@@ -338,10 +338,10 @@ ls(char *path)
         continue;
       }
       printf(1, "%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
- 25d:	8b 8d e4 fd ff ff    	mov    -0x21c(%ebp),%ecx
- 263:	0f bf 85 d4 fd ff ff 	movswl -0x22c(%ebp),%eax
+ 25d:	8b 8d e0 fd ff ff    	mov    -0x220(%ebp),%ecx
+ 263:	0f bf 85 d0 fd ff ff 	movswl -0x230(%ebp),%eax
  26a:	83 ec 0c             	sub    $0xc,%esp
- 26d:	8b 95 dc fd ff ff    	mov    -0x224(%ebp),%edx
+ 26d:	8b 95 d8 fd ff ff    	mov    -0x228(%ebp),%edx
  273:	89 8d ac fd ff ff    	mov    %ecx,-0x254(%ebp)
  279:	8d 8d e8 fd ff ff    	lea    -0x218(%ebp),%ecx
  27f:	89 95 b0 fd ff ff    	mov    %edx,-0x250(%ebp)
@@ -1062,6 +1062,7 @@ SYSCALL(uptime)
 
 00000622 <setconsole>:
 
+SYSCALL(setconsole)
  622:	b8 16 00 00 00       	mov    $0x16,%eax
  627:	cd 40                	int    $0x40
  629:	c3                   	ret    

@@ -718,6 +718,7 @@ SYSCALL(uptime)
 
 00000362 <setconsole>:
 
+SYSCALL(setconsole)
  362:	b8 16 00 00 00       	mov    $0x16,%eax
  367:	cd 40                	int    $0x40
  369:	c3                   	ret    

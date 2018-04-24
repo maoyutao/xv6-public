@@ -892,7 +892,7 @@ writetest1(void)
 
   for(i = 0; i < MAXFILE; i++){
      6c7:	83 c3 01             	add    $0x1,%ebx
-     6ca:	81 fb 8c 00 00 00    	cmp    $0x8c,%ebx
+     6ca:	81 fb 8b 40 00 00    	cmp    $0x408b,%ebx
      6d0:	75 ce                	jne    6a0 <writetest1+0x40>
       printf(stdout, "error: write big file failed\n", i);
       exit();
@@ -962,7 +962,7 @@ writetest1(void)
      72d:	85 c0                	test   %eax,%eax
      72f:	75 cf                	jne    700 <writetest1+0xa0>
       if(n == MAXFILE - 1){
-     731:	81 fb 8b 00 00 00    	cmp    $0x8b,%ebx
+     731:	81 fb 8a 40 00 00    	cmp    $0x408a,%ebx
      737:	0f 84 86 00 00 00    	je     7c3 <writetest1+0x163>
              n, ((int*)buf)[0]);
       exit();
@@ -1041,7 +1041,7 @@ writetest1(void)
       if(n == MAXFILE - 1){
         printf(stdout, "read only %d blocks from big", n);
      7c3:	83 ec 04             	sub    $0x4,%esp
-     7c6:	68 8b 00 00 00       	push   $0x8b
+     7c6:	68 8a 40 00 00       	push   $0x408a
      7cb:	68 86 3f 00 00       	push   $0x3f86
      7d0:	ff 35 a4 5d 00 00    	pushl  0x5da4
      7d6:	e8 15 32 00 00       	call   39f0 <printf>
@@ -9098,6 +9098,7 @@ SYSCALL(uptime)
 
 00003942 <setconsole>:
 
+SYSCALL(setconsole)
     3942:	b8 16 00 00 00       	mov    $0x16,%eax
     3947:	cd 40                	int    $0x40
     3949:	c3                   	ret    

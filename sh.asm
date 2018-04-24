@@ -2609,6 +2609,7 @@ SYSCALL(uptime)
 
 00000dc2 <setconsole>:
 
+SYSCALL(setconsole)
      dc2:	b8 16 00 00 00       	mov    $0x16,%eax
      dc7:	cd 40                	int    $0x40
      dc9:	c3                   	ret    
