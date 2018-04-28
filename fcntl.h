@@ -3,3 +3,4 @@
 #define O_RDWR    0x002
 #define O_CREATE  0x200
 #define O_OVER    0X020
+#define O_ADD     0X010
