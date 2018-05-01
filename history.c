@@ -7,6 +7,7 @@
 
 #include "types.h"
 #include "user.h"
+#include "fcntl.h"
 
 void tail(int fp,int num){
 	const int bufSize = 128;
@@ -74,11 +75,25 @@ int toNumber(char *argv, int lenLimit)
   return result;
 }
 
-void history(int n)
+void showHistory(int n)
 {
   int fp = open("/.history", 0);
   tail(fp, n);
   close(fp);
+}
+
+void clearHistory()
+{
+	if(unlink("/.history") < 0){
+		printf(2, "history: /.history failed to delete\n");
+		return;
+	}
+	int fp = open("/.history", O_RDONLY | O_CREATE);
+	if (fp < 0)
+	{
+		printf(2, "history: /.history failed to recreate\n");
+		return;
+	}
 }
 
 int
@@ -86,18 +101,18 @@ main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-      history(10);
-    } else {
+      showHistory(10);
+    } else if (strcmp(argv[1], "-c") == 0){
+			clearHistory();
+		} else {
       int n = toNumber(argv[1], 32);
-			// printf(2, ">2\n");
-			// printf(1, ">2\n");
       if (n == -1)
       {
         printf(2, "history: numeric argument required\n");
 				exit();
         return -1;
       } else {
-        history(n);
+        showHistory(n);
       }
     }
 		exit();
