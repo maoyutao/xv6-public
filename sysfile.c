@@ -18,8 +18,8 @@
 #include "memlayout.h"
 #include "x86.h"
 
-#include "history.h"
 #include "var_in_kernel.h"
+#include "history.h"
 
 #define CRTPORT 0x3d4
 static ushort *crt = (ushort*)P2V(0xb8000);  // CGA memory
@@ -50,22 +50,6 @@ sys_setconsole(void)
         mode = 0;
     consolemode = mode;
     return 0;
-}
-
-int sys_passHistory(void){
-  struct history *p = 0;
-  char *str = (char *)p;
-  argptr(0,&str,sizeof(struct history));
-  p = (struct history *)str;
-  memset(&hs,0,sizeof(struct history));
-  hs.length = p->length;
-  hs.curcmd = p->curcmd;
-  hs.lastcmd = p->lastcmd;
-  int i;
-  for(i = 0; i < hs.length;i++){
-    strncpy(hs.record[i],p->record[i],strlen(p->record[i]));
-  }
-  return 0;
 }
 
 // Fetch the nth word-sized system call argument as a file descriptor
